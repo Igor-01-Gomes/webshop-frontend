@@ -1,24 +1,28 @@
-﻿fetch('https://fakestoreapi.com/products')
-    .then(res => res.json())
-    .then(products => {
-        const container = document.getElementById('product-container');
+﻿
+fetch('https://fakestoreapi.com/products')
+  .then(res => res.json())
+  .then(products => {
 
-        const product = products[0];
+    const container = document.getElementById('products');
 
-        const div = document.createElement('div');
+    products.forEach(product => {
 
-        div.innerHTML = `
-            <img src="${product.image}" width="100">
-            <h3>${product.title}</h3>
-            <p>${product.price} $</p>
-            <button>Order</button>
-        `;
+      const card = document.createElement("div");
+      card.classList.add("card");
 
-        const button = div.querySelector('button');
+      card.innerHTML = `
+        <img src="${product.image}" width="100">
+        <h3>${product.title}</h3>
+        <p class="price">${product.price} $</p>
+        <button>Order</button>
+      `;
 
-        button.addEventListener('click', () => {
-            window.location.href = 'order.html';
-        });
+      const button = card.querySelector('button');
 
-        container.appendChild(div);
+      button.addEventListener('click', () => {
+        window.location.href = 'order.html';
+      });
+
+      container.appendChild(card);
     });
+  });
